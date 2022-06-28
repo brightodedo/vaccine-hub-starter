@@ -7,6 +7,7 @@ import "./Portal.css"
 export default function Portal({ user, setAppState }) {
   const navigate = useNavigate()
   const isAuthenticated = Boolean(user?.email)
+  const date = new Date(user?.date)
 
   const handleOnLogout = () => {
     setAppState({})
@@ -17,7 +18,7 @@ export default function Portal({ user, setAppState }) {
 
   const content = isAuthenticated ? (
     <>
-      <p className="appt">Your appointment is on {moment().calendar(new Date(user.date))}</p>
+      <p className="appt">Your appointment is on {date.toDateString()}</p>
       <p className="location">
         Please head to <strong>{user.location}</strong> on that day.
       </p>
@@ -39,7 +40,7 @@ export default function Portal({ user, setAppState }) {
   return (
     <div className="Portal">
       <div className="content">
-        {isAuthenticated ? <h1>Welcome, {user.firstName}!</h1> : null}
+        {isAuthenticated ? <h1>Welcome, {user.first_name}!</h1> : null}
 
         <div className="card">
           <div className="header">

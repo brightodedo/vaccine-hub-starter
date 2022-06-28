@@ -51,7 +51,7 @@ class User{
         throw new UnauthorizedError("Invalid username and password")
     }
     static async register(credentials){
-        const requiredFields = ["email", "password", "first_name", "last_name", "location"]
+        const requiredFields = ["email", "password", "firstName", "lastName", "location", "date"]
 
         requiredFields.forEach(field => {
             if(!credentials.hasOwnProperty(field)){
@@ -79,11 +79,12 @@ class User{
             password,
             first_name,
             last_name,
-            location
+            location,
+            date
         ) 
-        VALUES ($1, $2, $3, $4, $5) 
+        VALUES ($1, $2, $3, $4, $5, $6) 
         RETURNING id, email, first_name, last_name, location, date;
-        `, [lowerCasedEmail, hashedPassword, credentials.first_name, credentials.last_name, credentials.location])
+        `, [lowerCasedEmail, hashedPassword, credentials.firstName, credentials.lastName, credentials.location, credentials.date])
 
 
         const user = result.rows[0]
