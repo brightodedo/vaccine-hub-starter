@@ -40,7 +40,7 @@ export default function Portal({ user, setAppState }) {
 
   const updateBtn = isAuthenticated ? (
     <Link to="/portal/update">
-    <button className="btn primary">
+    <button className="btn secondary">
       Update
     </button></Link>
   ) : (
@@ -49,7 +49,7 @@ export default function Portal({ user, setAppState }) {
 
   const cancelBtn = isAuthenticated ? (
     <Link to="/portal/cancel">
-    <button className="btn primary" >
+    <button className="btn warning" >
       Cancel
     </button></Link>
   ) : (

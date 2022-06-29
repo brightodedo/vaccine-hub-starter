@@ -77,6 +77,19 @@ button:active,
   color: white;
   border: solid 1px var(--deep-blue);
 }
+
+.btn.secondary {
+  background: green;
+  color: white;
+  border: solid 1px green;
+}
+
+.btn.warning {
+  background: red;
+  color: white;
+  border: solid 1px red;
+}
+
 .btn.outline {
   background: white;
   color: var(--deep-blue);
