@@ -15,6 +15,49 @@ class User{
         }
     }
 
+    static async updateDate(credentials){
+        const requiredFields = ["email", "date", "location"]
+
+        requiredFields.forEach(field => {
+            if(!credentials.hasOwnProperty(field)){
+                throw new BadRequestError( `Mising ${field} in request body.`)
+            }
+        })
+
+        const lowerCasedEmail = credentials.email.toLowerCase()
+
+        const result = await db.query(`
+        UPDATE users
+            SET date = $1,
+            location = $2
+            WHERE email = $3
+        RETURNING id, email, first_name, last_name, location, date;
+        `, [credentials.date, credentials.location, lowerCasedEmail])
+        
+        const user = result.rows[0]
+
+        return this.makePublicUser(user)
+    }
+
+    static async deleteUser(email){
+        const existingUser = await User.fetchUserByEmail(email)
+        if(!existingUser){
+            throw new BadRequestError(`No Such Email : ${email}`)
+        }
+
+        const lowerCasedEmail = email.toLowerCase()
+
+        const result = await db.query(`
+        DELETE FROM users
+            WHERE email = $1
+        RETURNING id, email, first_name, last_name, location, date;
+            `, [lowerCasedEmail])
+
+        const user = result.rows[0]
+
+        return this.makePublicUser(user)
+    }
+
     static async fetchUserByEmail(email){
         if (!email){
             throw new BadRequestError("email is missing")

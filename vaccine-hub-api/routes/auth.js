@@ -23,4 +23,24 @@ router.post('/register', async (req, res, next) => {
     }
 })
 
+router.post('/update', async (req, res, next) => {
+    try{
+        const user = await User.updateDate(req.body)
+        return res.status(201).json({user})
+    }
+    catch(err){
+        next(err)
+    }
+})
+
+router.post('/cancel', async(req, res, next) => {
+    try{
+        const user = await User.deleteUser(req.body.email)
+        return res.status(201).json({user})
+    }
+    catch(err){
+        next(err)
+    }
+})
+
 module.exports = router

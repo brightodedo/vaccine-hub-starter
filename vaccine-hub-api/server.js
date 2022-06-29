@@ -14,7 +14,7 @@ app.use("/auth", authRoutes)
 
 
 app.use((req, res, next) => {
-    return next(NotFoundError())
+    return next(new NotFoundError())
 })
 
 app.use((err,req,res,next) => {

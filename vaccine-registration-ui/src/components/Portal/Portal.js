@@ -14,6 +14,7 @@ export default function Portal({ user, setAppState }) {
     navigate("/")
   }
 
+
   const title = isAuthenticated ? "Appointment Confirmed" : "Please login to the portal to see your appointment."
 
   const content = isAuthenticated ? (
@@ -37,6 +38,24 @@ export default function Portal({ user, setAppState }) {
     </Link>
   )
 
+  const updateBtn = isAuthenticated ? (
+    <Link to="/portal/update">
+    <button className="btn primary">
+      Update
+    </button></Link>
+  ) : (
+    null
+  )
+
+  const cancelBtn = isAuthenticated ? (
+    <Link to="/portal/cancel">
+    <button className="btn primary" >
+      Cancel
+    </button></Link>
+  ) : (
+    null
+  )
+
   return (
     <div className="Portal">
       <div className="content">
@@ -48,6 +67,8 @@ export default function Portal({ user, setAppState }) {
           </div>
           <div className="content">{content}</div>
           <div className="footer">{button}</div>
+          <div className="footer">{updateBtn}</div>
+          <div className="footer">{cancelBtn}</div>
         </div>
       </div>
 

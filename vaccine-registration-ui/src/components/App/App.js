@@ -6,9 +6,12 @@ import Register from "../Register/Register"
 import Login from "../Login/Login"
 import Portal from "../Portal/Portal"
 import "./App.css"
+import Update from "../Update/Update"
+import Cancel from "../Cancel/Cancel"
 
 export default function App() {
   const [appState, setAppState] = useState({})
+
 
   return (
     <div className="App">
@@ -21,6 +24,10 @@ export default function App() {
           <Route
             path="/portal"
             element={<Portal setAppState={setAppState} appState={appState} user={appState?.user} />}
+          />
+          <Route path="/portal/update" element={<Update setAppState={setAppState} appState={appState}/>}
+          />
+          <Route path="/portal/cancel" element={<Cancel setAppState={setAppState} appState={appState}/>}
           />
         </Routes>
       </BrowserRouter>
